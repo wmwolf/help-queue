@@ -76,7 +76,7 @@ const HelpQueue = () => {
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-        <div className="bg-blue-600 p-6">
+        <div className="bg-brand-royal p-6">
           <h2 className="text-2xl font-bold text-white">Lab Help Queue</h2>
         </div>
         
@@ -88,18 +88,18 @@ const HelpQueue = () => {
               placeholder="Names (e.g. Alice & Bob)"
               value={names}
               onChange={(e) => setNames(e.target.value)}
-              className="md:col-span-4 h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="md:col-span-4 h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-bright-blue focus:border-transparent"
             />
             <input
               type="text"
               placeholder="What's the issue? (e.g. Lab 3 - Array indexing error)"
               value={problem}
               onChange={(e) => setProblem(e.target.value)}
-              className="md:col-span-6 h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="md:col-span-6 h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-bright-blue focus:border-transparent"
             />
             <button 
               onClick={addToQueue}
-              className="md:col-span-2 h-10 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+              className="md:col-span-2 h-10 bg-brand-royal text-white rounded-md hover:bg-brand-bright-blue transition-colors flex items-center justify-center gap-2"
             >
               <UserPlus className="h-4 w-4" />
               <span>Join</span>
@@ -131,7 +131,7 @@ const HelpQueue = () => {
                     {request.status === 'waiting' && (
                       <button 
                         onClick={() => startHelping(request.id)}
-                        className="px-3 py-1.5 text-sm bg-blue-50 text-blue-600 border border-blue-200 rounded-md hover:bg-blue-100 transition-colors"
+                        className="px-3 py-1.5 text-sm bg-gray-100 text-green-600 border border-green-600 rounded-md hover:bg-green-600 hover:text-white transition-colors"
                       >
                         Start Helping
                       </button>
