@@ -26,8 +26,18 @@ const HelpQueue = () => {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    const savedNames = localStorage.getItem('queueNames');
+    if (savedNames) {
+      setNames(savedNames);
+    }
+  }, []);
+
   const addToQueue = async () => {
     if (!names.trim() || !problem.trim()) return;
+    
+    // Save names to localStorage
+    localStorage.setItem('queueNames', names.trim());
     
     const queueRef = ref(db, 'queue');
     const newRequest = {
@@ -39,7 +49,7 @@ const HelpQueue = () => {
     
     try {
       await push(queueRef, newRequest);
-      setNames('');
+      // Don't clear the names input anymore
       setProblem('');
     } catch (error) {
       console.error('Error adding request:', error);
@@ -82,29 +92,35 @@ const HelpQueue = () => {
         
         <div className="p-6 space-y-6">
           {/* Input Form */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-            <input
-              type="text"
-              placeholder="Names (e.g. Alice & Bob)"
-              value={names}
-              onChange={(e) => setNames(e.target.value)}
-              className="md:col-span-4 h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-bright-blue focus:border-transparent"
-            />
-            <input
-              type="text"
-              placeholder="What's the issue? (e.g. Lab 3 - Array indexing error)"
-              value={problem}
-              onChange={(e) => setProblem(e.target.value)}
-              className="md:col-span-6 h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-bright-blue focus:border-transparent"
-            />
-            <button 
-              onClick={addToQueue}
-              className="md:col-span-2 h-10 bg-brand-royal text-white rounded-md hover:bg-brand-bright-blue transition-colors flex items-center justify-center gap-2"
-            >
-              <UserPlus className="h-4 w-4" />
-              <span>Join</span>
-            </button>
-          </div>
+          <form 
+  onSubmit={(e) => {
+    e.preventDefault();  // Prevent default form submission
+    addToQueue();
+  }}
+  className="grid grid-cols-1 md:grid-cols-12 gap-4"
+>
+  <input
+    type="text"
+    placeholder="Names (e.g. Alice & Bob)"
+    value={names}
+    onChange={(e) => setNames(e.target.value)}
+    className="md:col-span-4 h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+  />
+  <input
+    type="text"
+    placeholder="What's the issue? (e.g. Lab 3: Part 2)"
+    value={problem}
+    onChange={(e) => setProblem(e.target.value)}
+    className="md:col-span-6 h-10 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+  />
+  <button 
+    type="submit"
+    className="md:col-span-2 h-10 bg-brand-royal text-white rounded-md hover:bg-brand-royal transition-colors flex items-center justify-center gap-2"
+  >
+    <UserPlus className="h-4 w-4" />
+    <span>Join</span>
+  </button>
+</form>
 
           {/* Queue List */}
           <div className="space-y-4">
@@ -115,11 +131,15 @@ const HelpQueue = () => {
                   request.status === 'helping' 
                     ? 'bg-green-50 border-2 border-green-500' 
                     : 'bg-white border border-gray-200 hover:border-gray-300'
+                } ${
+                  request.names === names.trim()
+                    ? 'border-4 border-brand-royal shadow-lg' 
+                    : ''
                 }`}
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex-1 min-w-0">
-                    <div className="font-medium text-gray-900">{request.names}</div>
+                    <div className={`font-medium text-gray-900 ${request.names === names.trim() ? 'font-extrabold': ''}`}>{request.names}</div>
                     <div className="text-sm text-gray-600 mt-1">{request.problem}</div>
                     <div className="text-xs text-gray-500 flex items-center mt-2">
                       <Clock className="h-3 w-3 mr-1" />

@@ -20,6 +20,9 @@ module.exports = {
         'display': ['grad', 'serf'],
         'body': ['neue-haas-grotesk-text', 'sans-serif'],
         'heading': ['vinila-extended', 'serif']
+      },
+      borderWidth: {
+        '6': '6px',
       }
     },
   },
