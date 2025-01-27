@@ -133,13 +133,13 @@ const HelpQueue = () => {
                     : 'bg-white border border-gray-200 hover:border-gray-300'
                 } ${
                   request.names === names.trim()
-                    ? 'border-4 border-brand-royal shadow-lg' 
+                    ? 'border-4 border-brand-gold shadow-lg' 
                     : ''
                 }`}
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex-1 min-w-0">
-                    <div className={`font-medium text-gray-900 ${request.names === names.trim() ? 'font-extrabold': ''}`}>{request.names}</div>
+                    <div className={`${request.names === names.trim() ? 'text-black font-bold': 'text-gray-900 font-medium'}`}>{request.names}</div>
                     <div className="text-sm text-gray-600 mt-1">{request.problem}</div>
                     <div className="text-xs text-gray-500 flex items-center mt-2">
                       <Clock className="h-3 w-3 mr-1" />
