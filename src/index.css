@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  /* Force generation of brand color borders */
-  .border-brand {
-    @apply border-brand-gold border-brand-royal border-brand-navy border-brand-old-gold;
-  }
-}
-
 :root {
   font-family: theme('fontFamily.body');
 }
