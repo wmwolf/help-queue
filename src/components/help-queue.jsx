@@ -10,6 +10,7 @@ const HelpQueue = () => {
   const [problem, setProblem] = useState('');
   const [currentlyHelping, setCurrentlyHelping] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [timeUpdate, setTimeUpdate] = useState(0); // Added to force re-renders
 
   const getButtonState = () => {
     const currentNames = authorizedName;
@@ -65,6 +66,15 @@ const HelpQueue = () => {
       setAuthorizedName(savedNames);  // Add this line
       setIsAdmin(savedNames.trim().toLowerCase() === 'admin');
     }
+  }, []);
+
+  // Set up timer to update times every minute
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeUpdate(prev => prev + 1);
+    }, 60000); // Update every minute
+
+    return () => clearInterval(timer); // Cleanup on unmount
   }, []);
 
   const addToQueue = async () => {
