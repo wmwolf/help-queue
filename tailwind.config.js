@@ -18,7 +18,7 @@ module.exports = {
       },
       fontFamily: {
         'display': ['grad', 'serf'],
-        'body': ['neue-haas-grotesk-text', 'sans-serif'],
+        'body': ['neue-haas-grotesk-display', 'sans-serif'],
         'heading': ['vinila-extended', 'serif']
       },
       fontWeight: {
@@ -33,7 +33,17 @@ module.exports = {
       borderWidth: {
         '6': '6px',
       }
+
     },
   },
+  safelist: [
+    {
+      pattern: /^border-brand-.+/,
+      variants: ['responsive', 'hover', 'focus'],
+    },
+    {
+      pattern:/^font-(light|regular|medium|semibold|bold|extrabold|black)/,
+    }
+  ],
   plugins: [],
 }

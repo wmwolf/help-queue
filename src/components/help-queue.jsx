@@ -126,20 +126,20 @@ const HelpQueue = () => {
           <div className="space-y-4">
             {queue.map((request) => (
               <div 
-                key={request.id} 
-                className={`rounded-lg p-4 transition-colors ${
-                  request.status === 'helping' 
-                    ? 'bg-green-50 border-2 border-green-500' 
-                    : 'bg-white border border-gray-200 hover:border-gray-300'
-                } ${
-                  request.names === names.trim()
-                    ? 'border-4 border-brand-gold shadow-lg' 
-                    : ''
-                }`}
-              >
+              key={request.id} 
+              className={[
+                'rounded-lg p-4 transition-colors',
+                request.status === 'helping' 
+                  ? 'bg-green-50 border-2 border-green-500'
+                  : 'bg-white border border-gray-200 hover:border-gray-300',
+                request.names === names.trim()
+                  ? 'border-4 border-black shadow-lg'
+                  : ''
+              ].filter(Boolean).join(' ')}
+            >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex-1 min-w-0">
-                    <div className={`${request.names === names.trim() ? 'text-black font-bold': 'text-gray-900 font-medium'}`}>{request.names}</div>
+                    <div className={`${request.names === names.trim() ? 'text-black font-bold': 'text-gray-600 font-medium'}`}>{request.names}</div>
                     <div className="text-sm text-gray-600 mt-1">{request.problem}</div>
                     <div className="text-xs text-gray-500 flex items-center mt-2">
                       <Clock className="h-3 w-3 mr-1" />
