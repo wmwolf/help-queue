@@ -158,6 +158,9 @@ const HelpQueue = () => {
               </div>
             )}
           </div>
+          <div className="text-white text-sm opacity-70 hidden sm:block">
+            {window.location.href}
+          </div>
         </div>
         
         
